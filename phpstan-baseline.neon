@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Codappix\\\\Typo3PhpDatasets\\\\PhpDataSet\\:\\:getConnectionPool\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Database\\\\ConnectionPool but returns object\\.$#"
+			count: 1
+			path: Classes/PhpDataSet.php
