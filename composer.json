@@ -1,0 +1,22 @@
+{
+    "name": "codappix/typo3-php-datasets",
+    "description": "Enables usage of PHP data sets within TYPO3.",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Codappix\\Typo3PhpDatasets\\": "Classes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Siepmann",
+            "email": "coding@daniel-siepmann.de"
+        }
+    ],
+    "require": {
+        "php": "^7.3 || ^7.4 || ^8.0 || ^8.1 || ^8.2",
+        "doctrine/dbal": "^2.13",
+        "typo3/cms-core": "^10.4 || ^11.5"
+    }
+}
