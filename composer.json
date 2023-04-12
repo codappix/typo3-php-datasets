@@ -19,9 +19,14 @@
             "email": "coding@daniel-siepmann.de"
         }
     ],
+    "bin": [
+        "bin/typo3-php-datasets"
+    ],
     "require": {
         "php": "^7.3 || ^7.4 || ^8.0 || ^8.1 || ^8.2",
+        "composer-runtime-api": "^2.2",
         "doctrine/dbal": "^2.13",
+        "symfony/console": "^5.4",
         "typo3/cms-core": "^10.4 || ^11.5"
     },
     "require-dev": {
@@ -41,6 +46,8 @@
         "allow-plugins": {
             "typo3/class-alias-loader": true,
             "typo3/cms-composer-installers": true
-        }
+        },
+        "lock": false,
+        "sort-packages": true
     }
 }
