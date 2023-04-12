@@ -27,19 +27,26 @@ let
       composer install --prefer-dist --no-progress --working-dir="$PROJECT_ROOT"
     '';
   };
+  projectCgl = pkgs.writeShellApplication {
+    name = "project-cgl";
+    runtimeInputs = [
+      php
+    ];
+    text = ''
+      ./vendor/bin/php-cs-fixer fix --diff
+    '';
+  };
 
 in pkgs.mkShell {
   name = "TYPO3 PHP Datasets";
   buildInputs = [
     projectInstall
+    projectCgl
     phpWithXdebug
     composer
-    pkgs.parallel
   ];
 
   shellHook = ''
-    export PROJECT_ROOT="$(pwd)"
-
     export typo3DatabaseDriver=pdo_sqlite
   '';
 }

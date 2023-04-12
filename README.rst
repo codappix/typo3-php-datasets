@@ -71,6 +71,18 @@ Within testing framework
 
       $this->assertPHPDataSet(__DIR__ . '/Fixtures/SimpleSet.php');
 
+Converter
+=========
+
+The package provides a single bin with command to convert existing data-sets.
+The bin is available as ``typo3-php-datasets``.
+Available commands:
+
+- ``convert-from-xml``
+
+Each command will convert the existing file(s) and place a new php variant next to it.
+Existing files are only read, not changed.
+
 TODO
 ====
 

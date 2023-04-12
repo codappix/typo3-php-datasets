@@ -1,7 +1,9 @@
 <?php
 $finder = (new PhpCsFixer\Finder())
     ->ignoreVCSIgnored(true)
-    ->in(realpath(__DIR__));
+    ->exclude('Tests/Functional/Converter/Fixtures/Xml/')
+    ->in(realpath(__DIR__))
+;
 
 return (new \PhpCsFixer\Config())
     ->setRiskyAllowed(true)
