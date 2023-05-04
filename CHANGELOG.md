@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.0 - 2023-05-04
+
+### Added
+
+- Add PHP 7.2 support.
+
 ## v1.1.0 - 2023-04-12
 
 ### Added
