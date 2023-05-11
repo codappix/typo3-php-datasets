@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace Codappix\Typo3PhpDatasets;
 
-use Doctrine\DBAL\DBALException;
+use Exception;
 use InvalidArgumentException;
 
 /**
@@ -38,8 +38,8 @@ trait TestingFramework
         $dataSet = include $filePath;
         try {
             (new PhpDataSet())->import($dataSet);
-        } catch (DBALException $e) {
-            self::fail('SQL Error for PHP data-set "' . $filePath . '":' . PHP_EOL . $e->getMessage());
+        } catch (Exception $e) {
+            self::fail('Error for PHP data-set "' . $filePath . '":' . PHP_EOL . $e->getMessage());
         }
     }
 

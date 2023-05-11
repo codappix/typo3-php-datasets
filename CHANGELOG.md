@@ -1,5 +1,11 @@
 # Changelog
 
+## Upcoming
+
+### Added
+
+- Add Support for TYPO3 v12.4.
+
 ## v1.2.0 - 2023-05-04
 
 ### Added
