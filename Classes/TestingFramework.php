@@ -54,7 +54,7 @@ trait TestingFramework
         $failMessages = [];
 
         foreach ($dataSet as $tableName => $expectedRecords) {
-            $records = $this->getAllRecords($tableName, true);
+            $records = $this->getAllRecords($tableName, (isset($GLOBALS['TCA'][$tableName])));
 
             foreach ($expectedRecords as $assertion) {
                 $result = $this->assertInRecords($assertion, $records);
