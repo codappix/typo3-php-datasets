@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.1 - 2023-08-10
+
+### Added
+
+- Add Support for mm relations in assertions.
+
 ## v1.3.0 - 2023-05-11
 
 ### Added

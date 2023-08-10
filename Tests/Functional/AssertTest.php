@@ -63,6 +63,15 @@ class AssertTest extends AbstractFunctionalTestCase
     /**
      * @test
      */
+    public function canAssertMmRelation(): void
+    {
+        $this->importPHPDataSet(__DIR__ . '/Fixtures/MmRelation.php');
+        $this->assertPHPDataSet(__DIR__ . '/Fixtures/MmRelation.php');
+    }
+
+    /**
+     * @test
+     */
     public function failsForMissingAssertionWithUid(): void
     {
         $this->expectException(AssertionFailedError::class);
@@ -78,14 +87,11 @@ class AssertTest extends AbstractFunctionalTestCase
         $this->importPHPDataSet(__DIR__ . '/Fixtures/SimpleSet.php');
 
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessage(
-            'Assertion in data-set failed for "pages:1":'
-            . PHP_EOL
-            . 'Fields|Assertion             |Record  '
-            . PHP_EOL
-            . 'title |Rootpage without match|Rootpage'
-            . PHP_EOL
-        );
+        $this->expectExceptionMessage(implode(PHP_EOL, [
+            'Assertion in data-set failed for "pages:1":',
+            'Fields|Assertion             |Record  ',
+            'title |Rootpage without match|Rootpage',
+        ]));
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/AssertDifferingWithUid.php');
     }
 
@@ -103,8 +109,33 @@ class AssertTest extends AbstractFunctionalTestCase
             '   \'pid\' => \'0\', ',
             '   \'title\' => \'Rootpage without match\'',
             ')',
-        ]) . PHP_EOL);
+            '',
+        ]));
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/AssertDifferingWithoutUid.php');
+    }
+
+    /**
+     * @test
+     */
+    public function failsForAssertionForMmRelation(): void
+    {
+        $this->importPHPDataSet(__DIR__ . '/Fixtures/MmRelation.php');
+
+        $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage(implode(PHP_EOL, [
+            'Assertion in data-set failed for "sys_category_record_mm":',
+            'array(',
+            '   \'uid_local\' => \'1\', ',
+            '   \'uid_foreign\' => \'2\', ',
+            '   \'tablenames\' => \'pages\', ',
+            '   \'fieldname\' => \'categories\', ',
+            '   \'sorting\' => \'0\', ',
+            '   \'sorting_foreign\' => \'3\'',
+            ')',
+            '',
+            'Not asserted record found for "sys_category_record_mm:".',
+        ]));
+        $this->assertPHPDataSet(__DIR__ . '/Fixtures/MmRelationBroken.php');
     }
 
     /**
