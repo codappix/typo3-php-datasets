@@ -3,11 +3,13 @@
 
 require $_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php';
 
+use Codappix\Typo3PhpDatasets\Command\ConvertFromCsv;
 use Codappix\Typo3PhpDatasets\Command\ConvertFromXml;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
 
 $application->add(new ConvertFromXml());
+$application->add(new ConvertFromCsv());
 
 $application->run();

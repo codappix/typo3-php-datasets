@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.0 - 2023-11-07
+
+### Added
+
+- Add command `convert-from-csv`.
+
 ## v1.3.1 - 2023-08-10
 
 ### Added
