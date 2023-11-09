@@ -1,0 +1,6 @@
+pages
+,uid,pid,title,deleted
+,1,0,Page with uid 1 below 0,0
+tt_content
+,uid,pid,header,deleted
+,1,1,Content with uid 1 on page 1,0
