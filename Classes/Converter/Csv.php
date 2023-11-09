@@ -71,7 +71,7 @@ class Csv implements Converter
                 break;
             }
 
-            if (is_array($line) && count($line) === 1 && is_string($line[0])) {
+            if (is_array($line) && count(array_filter($line)) === 1 && is_string($line[0])) {
                 // Line is a new table, introducing also new columns o next row
                 $tableName = $line[0];
                 $columns = [];
@@ -79,12 +79,12 @@ class Csv implements Converter
             }
 
             if ($columns === [] && is_array($line)) {
-                $columns = array_slice($line, 1);
+                $columns = array_filter($line);
                 continue;
             }
 
             if (is_array($line)) {
-                $values = array_slice($line, 1);
+                $values = array_slice($line, 1, count($columns));
                 $phpArray[$tableName][] = array_combine($columns, $values);
             }
         }
