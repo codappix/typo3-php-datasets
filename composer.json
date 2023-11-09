@@ -3,6 +3,10 @@
     "description": "Enables usage of PHP data sets within TYPO3.",
     "type": "library",
     "license": "GPL-2.0-or-later",
+    "keywords": [
+        "dev",
+        "testing"
+    ],
     "autoload": {
         "psr-4": {
             "Codappix\\Typo3PhpDatasets\\": "Classes/"

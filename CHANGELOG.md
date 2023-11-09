@@ -5,6 +5,7 @@
 ### Added
 
 - Add command `convert-from-csv`.
+- Mark as dev dependency.
 
 ## v1.3.1 - 2023-08-10
 
