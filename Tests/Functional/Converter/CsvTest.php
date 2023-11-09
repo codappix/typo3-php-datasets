@@ -99,6 +99,10 @@ class CsvTest extends TestCase
                 'incomingCsvFile' => __DIR__ . '/Fixtures/Csv/RecordsInDifferentTablesIncoming.csv',
                 'expectedResultFile' => __DIR__ . '/Fixtures/Csv/RecordsInDifferentTablesAssert.php',
             ],
+            'Extra columns' => [
+                'incomingCsvFile' => __DIR__ . '/Fixtures/Csv/ExtraColumnsIncoming.csv',
+                'expectedResultFile' => __DIR__ . '/Fixtures/Csv/ExtraColumnsAssert.php',
+            ],
         ];
     }
 }

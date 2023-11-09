@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.1 - 2023-11-09
+
+### Added
+
+- Support empty columns in CSV conversion.
+
 ## v1.4.0 - 2023-11-07
 
 ### Added
