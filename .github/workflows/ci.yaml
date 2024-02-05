@@ -15,7 +15,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: '8.3'
           coverage: none
           tools: composer:v2
         env:
@@ -35,6 +35,7 @@ jobs:
           - 8.0
           - 8.1
           - 8.2
+          - 8.3
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -58,7 +59,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: "8.3"
           coverage: none
           tools: composer:v2
         env:
@@ -81,7 +82,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.1"
+          php-version: "8.3"
           coverage: none
           tools: composer:v2
         env:
@@ -122,11 +123,23 @@ jobs:
             php-version: '8.2'
             typo3-version: '^11.5'
           - db-version: '8'
+            php-version: '8.3'
+            typo3-version: '^11.5'
+          - db-version: '8'
             php-version: '8.1'
             typo3-version: '^12.4'
           - db-version: '8'
             php-version: '8.2'
             typo3-version: '^12.4'
+          - db-version: '8'
+            php-version: '8.3'
+            typo3-version: '^12.4'
+          - db-version: '8'
+            php-version: '8.2'
+            typo3-version: '^13.0'
+          - db-version: '8'
+            php-version: '8.3'
+            typo3-version: '^13.0'
     steps:
       - uses: actions/checkout@v3
 
@@ -183,10 +196,18 @@ jobs:
             typo3-version: '^11.5'
           - php-version: '8.2'
             typo3-version: '^11.5'
+          - php-version: '8.3'
+            typo3-version: '^11.5'
           - php-version: '8.1'
             typo3-version: '^12.4'
           - php-version: '8.2'
             typo3-version: '^12.4'
+          - php-version: '8.3'
+            typo3-version: '^12.4'
+          - php-version: '8.2'
+            typo3-version: '^13.0'
+          - php-version: '8.3'
+            typo3-version: '^13.0'
     steps:
       - uses: actions/checkout@v3
 

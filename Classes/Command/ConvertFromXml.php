@@ -31,7 +31,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ConvertFromXml extends Command
 {
+    /**
+     * @var string
+     */
     protected static $defaultName = 'convert-from-xml';
+
+    /**
+     * @var string
+     */
     protected static $defaultDescription = 'Converts XML data-sets to PHP data-sets.';
 
     protected function configure(): void
