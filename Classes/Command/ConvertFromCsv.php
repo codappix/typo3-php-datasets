@@ -31,7 +31,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ConvertFromCsv extends Command
 {
+    /**
+     * @var string
+     */
     protected static $defaultName = 'convert-from-csv';
+
+    /**
+     * @var string
+     */
     protected static $defaultDescription = 'Converts CSV data-sets to PHP data-sets.';
 
     protected function configure(): void

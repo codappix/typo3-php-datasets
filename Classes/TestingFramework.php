@@ -84,7 +84,7 @@ trait TestingFramework
 
             if (!empty($records)) {
                 foreach ($records as $record) {
-                    $recordIdentifier = $tableName . ':' . $record['uid'];
+                    $recordIdentifier = $tableName . ':' . ($record['uid'] ?? '');
                     $failMessages[] = 'Not asserted record found for "' . $recordIdentifier . '".';
                 }
             }

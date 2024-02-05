@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace Codappix\Typo3PhpDatasets;
 
+use RuntimeException;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -32,7 +33,16 @@ class PhpDataSet
     {
         foreach ($dataSet as $tableName => $records) {
             $connection = $this->getConnectionPool()->getConnectionForTable($tableName);
-            $tableDetails = $connection->getSchemaManager()->listTableDetails($tableName);
+
+            if (method_exists($connection, 'getSchemaManager')) {
+                // <= 12
+                $tableDetails = $connection->getSchemaManager()->listTableDetails($tableName);
+            } elseif (method_exists($connection, 'getSchemaInformation')) {
+                // >= 13
+                $tableDetails = $connection->getSchemaInformation()->introspectTable($tableName);
+            } else {
+                throw new RuntimeException('Could not check the schema for table: ' . $tableName, 1707144020);
+            }
 
             foreach ($records as $record) {
                 $types = [];

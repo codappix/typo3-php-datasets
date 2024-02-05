@@ -4,7 +4,7 @@
 }:
 
 let
-  php = phps.packages.x86_64-linux.php81;
+  php = phps.packages.x86_64-linux.php83;
   inherit(php.packages) composer;
 
   phpWithXdebug = php.buildEnv {
