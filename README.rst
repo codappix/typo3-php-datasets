@@ -79,6 +79,7 @@ The bin is available as ``typo3-php-datasets``.
 Available commands:
 
 - ``convert-from-xml``
+- ``convert-from-csv``
 
 Each command will convert the existing file(s) and place a new php variant next to it.
 Existing files are only read, not changed.
