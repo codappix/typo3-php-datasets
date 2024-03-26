@@ -51,11 +51,18 @@ Within testing framework
           ],
       ];
 
-#. Add API
+#. Import the :php:`Codappix\Typo3PhpDatasets\TestingFramework` trait
 
    .. code-block:: php
 
-      use Codappix\Typo3PhpDatasets\TestingFramework;
+      use Codappix\Typo3PhpDatasets\TestingFramework as PhpDatasets;
+
+      final class MyTest extends FunctionalTestCase
+      {
+          use PhpDatasets;
+
+          // ...
+      }
 
 #. Use API
 
