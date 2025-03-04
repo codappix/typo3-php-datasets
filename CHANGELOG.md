@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.6.0 - 2025-03-04
+
+### Added
+
+- Support for PHP 8.4.
+
 ## v1.5.0 - 2024-02-05
 
 ### Added
