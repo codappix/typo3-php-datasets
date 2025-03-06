@@ -15,7 +15,7 @@ jobs:
       - name: 'Install PHP'
         uses: 'actions/setup-php@v2'
         with:
-          php-version: '8.4'
+          php-version: '8.5'
 
       - name: 'Validate composer.json'
         run: 'composer validate'
@@ -28,6 +28,7 @@ jobs:
           - '8.2'
           - '8.3'
           - '8.4'
+          - '8.5'
     steps:
       - name: 'Checkout'
         uses: 'actions/checkout@v5'
@@ -50,7 +51,7 @@ jobs:
       - name: 'Install PHP'
         uses: 'actions/setup-php@v2'
         with:
-          php-version: '8.4'
+          php-version: '8.5'
 
       - name: 'Install xmllint'
         run: 'sudo apt update && sudo apt install libxml2-utils'
@@ -112,6 +113,16 @@ jobs:
             typo3-version: '^13.0'
           - php-version: '8.4'
             typo3-version: '^13.0'
+          - php-version: '8.5'
+            typo3-version: '^13.0'
+          - php-version: '8.2'
+            typo3-version: '^14.0'
+          - php-version: '8.3'
+            typo3-version: '^14.0'
+          - php-version: '8.4'
+            typo3-version: '^14.0'
+          - php-version: '8.5'
+            typo3-version: '^14.0'
     steps:
       - uses: 'actions/checkout@v5'
 
@@ -149,6 +160,16 @@ jobs:
             typo3-version: '^13.4'
           - php-version: '8.4'
             typo3-version: '^13.4'
+          - php-version: '8.5'
+            typo3-version: '^13.4'
+          - php-version: '8.2'
+            typo3-version: '^14.0'
+          - php-version: '8.3'
+            typo3-version: '^14.0'
+          - php-version: '8.4'
+            typo3-version: '^14.0'
+          - php-version: '8.5'
+            typo3-version: '^14.0'
     steps:
       - uses: 'actions/checkout@v5'
 
