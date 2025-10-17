@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace Codappix\Typo3PhpDatasets;
 
+use Doctrine\DBAL\Schema\Exception\ColumnDoesNotExist;
 use RuntimeException;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,7 +40,7 @@ class PhpDataSet
                 $tableDetails = $connection->getSchemaManager()->listTableDetails($tableName);
             } elseif (method_exists($connection, 'getSchemaInformation')) {
                 // >= 13
-                $tableDetails = $connection->getSchemaInformation()->introspectTable($tableName);
+                $tableDetails = $connection->getSchemaInformation()->getTableInfo($tableName);
             } else {
                 throw new RuntimeException('Could not check the schema for table: ' . $tableName, 1707144020);
             }
@@ -47,7 +48,25 @@ class PhpDataSet
             foreach ($records as $record) {
                 $types = [];
                 foreach (array_keys($record) as $columnName) {
-                    $types[] = $tableDetails->getColumn((string)$columnName)->getType()->getBindingType();
+                    if (method_exists($tableDetails, 'getColumn') && is_object($tableDetails)) {
+                        // <= 12
+                        try {
+                            $types[] = $tableDetails->getColumn((string)$columnName)->getType()->getBindingType();
+                        } catch (ColumnDoesNotExist $exception) {
+                            throw new RuntimeException('Column "' . $columnName . '" does not exist in table: ' . $tableName, 1760699318);
+                        }
+                    } elseif (method_exists($tableDetails, 'getColumnInfo')  && is_object($tableDetails)) {
+                        // >= 13
+                        $column = $tableDetails->getColumnInfo((string)$columnName);
+
+                        if ($column === null) {
+                            throw new RuntimeException('Column "' . $columnName . '" does not exist in table: ' . $tableName, 1760699318);
+                        }
+
+                        $types[] = $column->getType()->getBindingType();
+                    } else {
+                        throw new RuntimeException('Could not get info for column "' . $columnName . '" of table: ' . $tableName, 1760697878);
+                    }
                 }
 
                 $connection->insert($tableName, $record, $types);
