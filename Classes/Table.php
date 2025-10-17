@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * Copyright (C) 2023 Daniel Siepmann <coding@daniel-siepmann.de>
+ * Copyright (C) 2025 Daniel Siepmann <coding@daniel-siepmann.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,26 +23,34 @@ declare(strict_types=1);
 
 namespace Codappix\Typo3PhpDatasets;
 
+use Doctrine\DBAL\ParameterType;
+use Doctrine\DBAL\Schema\Exception\ColumnDoesNotExist;
+use Doctrine\DBAL\Schema\Table as DbalTable;
+
 /**
- * @api
+ * @internal
  */
-class PhpDataSet
+final readonly class Table
 {
-    /**
-     * @api
-     */
-    public function import(array $dataSet): void
+    public function __construct(
+        private DbalTable $dbalTable,
+    ) {
+    }
+
+    public function getTypeForColumn(string $columnName): ParameterType
     {
-        $connectionFactory = new ConnectionFactory();
-
-        foreach ($dataSet as $tableName => $records) {
-            $connection = $connectionFactory->createForTable($tableName);
-            $table = $connection->getTable($tableName);
-
-            foreach ($records as $index => $record) {
-                $types = array_map($table->getTypeForColumn(...), array_keys($record));
-                $connection->insert($tableName, $record, $types);
-            }
+        try {
+            return $this->dbalTable
+                ->getColumn((string)$columnName)
+                ->getType()
+                ->getBindingType()
+            ;
+        } catch (ColumnDoesNotExist $e) {
+            throw new \RuntimeException(sprintf(
+                'Column "%s" does not exist in table: %s',
+                $columnName,
+                $this->dbalTable->getName(),
+            ), 1760941225);
         }
     }
 }
