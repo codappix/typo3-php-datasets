@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * Copyright (C) 2023 Daniel Siepmann <coding@daniel-siepmann.de>
+ * Copyright (C) 2025 Daniel Siepmann <coding@daniel-siepmann.de>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,26 +23,31 @@ declare(strict_types=1);
 
 namespace Codappix\Typo3PhpDatasets;
 
+use TYPO3\CMS\Core\Database\Connection as Typo3Connection;
+
 /**
- * @api
+ * @internal
  */
-class PhpDataSet
+final readonly class Connection
 {
-    /**
-     * @api
-     */
-    public function import(array $dataSet): void
+    public function __construct(
+        private Typo3Connection $typo3Connection,
+    ) {
+    }
+
+    public function insert(string $tableName, array $record, array $types): void
     {
-        $connectionFactory = new ConnectionFactory();
+        $this->typo3Connection->insert($tableName, $record, $types);
+    }
 
-        foreach ($dataSet as $tableName => $records) {
-            $connection = $connectionFactory->createForTable($tableName);
-            $table = $connection->getTable($tableName);
-
-            foreach ($records as $index => $record) {
-                $types = array_map($table->getTypeForColumn(...), array_keys($record));
-                $connection->insert($tableName, $record, $types);
+    public function getTable(string $tableName): Table
+    {
+        foreach ($this->typo3Connection->createSchemaManager()->listTables() as $table) {
+            if ($table->getObjectName()->toString() === $tableName) {
+                return new Table($table);
             }
         }
+
+        throw new \RuntimeException('Could not fetch table details for table: ' . $tableName, 1760939710);
     }
 }

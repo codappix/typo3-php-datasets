@@ -77,7 +77,7 @@ class ImportTest extends AbstractFunctionalTestCase
         $this->expectExceptionMessageMatches(
             '#Error for PHP data-set "' . __DIR__ . '/Fixtures/WithBrokenSql.php":'
             . PHP_EOL
-            . 'There is no column with name .*none_existing_column.* on table .*pages.*\.#'
+            . 'Column "none_existing_column" does not exist in table: pages#'
         );
         $this->importPHPDataSet(__DIR__ . '/Fixtures/WithBrokenSql.php');
     }

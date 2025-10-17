@@ -27,10 +27,13 @@ use Exception;
 use InvalidArgumentException;
 
 /**
- * Only use this within an FunctionalTestCase.
+ * @api Only use within `TYPO3\TestingFramework\Core\Functional\FunctionalTestCase`
  */
 trait TestingFramework
 {
+    /**
+     * @api
+     */
     protected function importPHPDataSet(string $filePath): void
     {
         $this->ensureFileExists($filePath);
@@ -45,6 +48,7 @@ trait TestingFramework
 
     /**
      * Highly inspired by TYPO3 testing framework.
+     * @api
      */
     protected function assertPHPDataSet(string $filePath): void
     {
