@@ -23,19 +23,20 @@ declare(strict_types=1);
 
 namespace Codappix\Typo3PhpDatasets\Tests\Functional;
 
+use Codappix\Typo3PhpDatasets\PhpDataSet;
+use Codappix\Typo3PhpDatasets\TestingFramework;
 use InvalidArgumentException;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 
-/**
- * @covers \Codappix\Typo3PhpDatasets\PhpDataSet
- * @covers \Codappix\Typo3PhpDatasets\TestingFramework
- * @testdox The Testing Framework trait
- */
+#[CoversClass(PhpDataSet::class)]
+#[CoversClass(TestingFramework::class)]
+#[TestDox('The Testing Framework trait')]
 class ImportTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function canImportSimpleSet(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/SimpleSet.php');
@@ -47,9 +48,7 @@ class ImportTest extends AbstractFunctionalTestCase
         self::assertSame('Some text', $records[1]['description']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canImportWithNullValue(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/WithNull.php');
@@ -58,9 +57,7 @@ class ImportTest extends AbstractFunctionalTestCase
         self::assertNull($records[1]['description']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canImportRecordsWithDifferentSetOfColumns(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/WithDifferentColumns.php');
@@ -73,9 +70,7 @@ class ImportTest extends AbstractFunctionalTestCase
         self::assertSame('Some other text', $records[2]['description']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function failsIfSqlError(): void
     {
         $this->expectException(AssertionFailedError::class);
@@ -87,9 +82,7 @@ class ImportTest extends AbstractFunctionalTestCase
         $this->importPHPDataSet(__DIR__ . '/Fixtures/WithBrokenSql.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function throwsExceptionIfFileDoesNotExist(): void
     {
         $this->expectException(InvalidArgumentException::class);

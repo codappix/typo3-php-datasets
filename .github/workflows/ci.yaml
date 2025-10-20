@@ -29,11 +29,6 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - 7.2
-          - 7.3
-          - 7.4
-          - 8.0
-          - 8.1
           - 8.2
           - 8.3
           - 8.4
@@ -102,42 +97,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - db-version: '5.7'
-            php-version: '7.2'
-            typo3-version: '^10.4'
-          - db-version: '5.7'
-            php-version: '7.3'
-            typo3-version: '^10.4'
-          - db-version: '8'
-            php-version: '7.4'
-            typo3-version: '^10.4'
-          - db-version: '8'
-            php-version: '7.4'
-            typo3-version: '^11.5'
-          - db-version: '8'
-            php-version: '8.0'
-            typo3-version: '^11.5'
-          - db-version: '8'
-            php-version: '8.1'
-            typo3-version: '^11.5'
-          - db-version: '8'
-            php-version: '8.2'
-            typo3-version: '^11.5'
-          - db-version: '8'
-            php-version: '8.3'
-            typo3-version: '^11.5'
-          - db-version: '8'
-            php-version: '8.1'
-            typo3-version: '^12.4'
-          - db-version: '8'
-            php-version: '8.2'
-            typo3-version: '^12.4'
-          - db-version: '8'
-            php-version: '8.3'
-            typo3-version: '^12.4'
-          - db-version: '8'
-            php-version: '8.4'
-            typo3-version: '^12.4'
           - db-version: '8'
             php-version: '8.2'
             typo3-version: '^13.0'
@@ -189,30 +148,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - php-version: '7.2'
-            typo3-version: '^10.4'
-          - php-version: '7.3'
-            typo3-version: '^10.4'
-          - php-version: '7.4'
-            typo3-version: '^10.4'
-          - php-version: '7.4'
-            typo3-version: '^11.5'
-          - php-version: '8.0'
-            typo3-version: '^11.5'
-          - php-version: '8.1'
-            typo3-version: '^11.5'
-          - php-version: '8.2'
-            typo3-version: '^11.5'
-          - php-version: '8.3'
-            typo3-version: '^11.5'
-          - php-version: '8.1'
-            typo3-version: '^12.4'
-          - php-version: '8.2'
-            typo3-version: '^12.4'
-          - php-version: '8.3'
-            typo3-version: '^12.4'
-          - php-version: '8.4'
-            typo3-version: '^12.4'
           - php-version: '8.2'
             typo3-version: '^13.4'
           - php-version: '8.3'

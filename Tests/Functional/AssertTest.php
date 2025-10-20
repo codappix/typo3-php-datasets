@@ -23,55 +23,48 @@ declare(strict_types=1);
 
 namespace Codappix\Typo3PhpDatasets\Tests\Functional;
 
+use Codappix\Typo3PhpDatasets\PhpDataSet;
+use Codappix\Typo3PhpDatasets\TestingFramework;
 use InvalidArgumentException;
 use PHPUnit\Framework\AssertionFailedError;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 
-/**
- * @covers \Codappix\Typo3PhpDatasets\PhpDataSet
- * @covers \Codappix\Typo3PhpDatasets\TestingFramework
- * @testdox The Testing Framework trait
- */
+#[CoversClass(PhpDataSet::class)]
+#[CoversClass(TestingFramework::class)]
+#[TestDox('The Testing Framework trait')]
 class AssertTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function canAssertAgainstSimpleSet(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/SimpleSet.php');
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/SimpleSet.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canAssertAgainstNullValue(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/WithNull.php');
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/WithNull.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canAssertAgainstDifferentSetOfColumns(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/WithDifferentColumns.php');
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/WithDifferentColumns.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canAssertMmRelation(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/MmRelation.php');
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/MmRelation.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function failsForMissingAssertionWithUid(): void
     {
         $this->expectException(AssertionFailedError::class);
@@ -79,9 +72,7 @@ class AssertTest extends AbstractFunctionalTestCase
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/AssertSimpleMissingUidSet.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function failsForDifferingAssertionWithUid(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/SimpleSet.php');
@@ -95,9 +86,7 @@ class AssertTest extends AbstractFunctionalTestCase
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/AssertDifferingWithUid.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function failsForAssertionWithoutUid(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/SimpleSet.php');
@@ -114,9 +103,7 @@ class AssertTest extends AbstractFunctionalTestCase
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/AssertDifferingWithoutUid.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function failsForAssertionForMmRelation(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/MmRelation.php');
@@ -138,9 +125,7 @@ class AssertTest extends AbstractFunctionalTestCase
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/MmRelationBroken.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function failsForAdditionalNoneAssertedRecords(): void
     {
         $this->importPHPDataSet(__DIR__ . '/Fixtures/WithDifferentColumns.php');
@@ -150,9 +135,7 @@ class AssertTest extends AbstractFunctionalTestCase
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/AssertAdditionalRecords.php');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function throwsExceptionIfFileDoesNotExist(): void
     {
         $this->expectException(InvalidArgumentException::class);

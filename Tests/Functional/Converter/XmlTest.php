@@ -26,12 +26,14 @@ namespace Codappix\Typo3PhpDatasets\Tests\Functional\Converter;
 use Codappix\Typo3PhpDatasets\Converter\Xml;
 use GlobIterator;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Codappix\Typo3PhpDatasets\Converter\Xml
- * @testdox The XML converter
- */
+#[CoversClass(Xml::class)]
+#[TestDox('The XML converter')]
 class XmlTest extends TestCase
 {
     protected function tearDown(): void
@@ -44,9 +46,7 @@ class XmlTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canBeCreated(): void
     {
         $subject = new Xml();
@@ -57,9 +57,7 @@ class XmlTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function throwsExceptionForNoneExistingFile(): void
     {
         $subject = new Xml();
@@ -69,11 +67,9 @@ class XmlTest extends TestCase
         $subject->convert('NoneExistingFile.xml');
     }
 
-    /**
-     * @test
-     * @dataProvider possibleXmlFiles
-     * @testdox Converts $_dataName XML to PHP
-     */
+    #[Test]
+    #[TestDox('Converts $_dataName XML to PHP')]
+    #[DataProvider('possibleXmlFiles')]
     public function convertsXmlFileToPhpFile(
         string $incomingXmlFile,
         string $expectedResultFile
