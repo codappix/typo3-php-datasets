@@ -26,12 +26,14 @@ namespace Codappix\Typo3PhpDatasets\Tests\Functional\Converter;
 use Codappix\Typo3PhpDatasets\Converter\Csv;
 use GlobIterator;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Codappix\Typo3PhpDatasets\Converter\Csv
- * @testdox The CSV converter
- */
+#[CoversClass(Csv::class)]
+#[TestDox('The CSV converter')]
 class CsvTest extends TestCase
 {
     protected function tearDown(): void
@@ -44,9 +46,7 @@ class CsvTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canBeCreated(): void
     {
         $subject = new Csv();
@@ -57,9 +57,7 @@ class CsvTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function throwsExceptionForNoneExistingFile(): void
     {
         $subject = new Csv();
@@ -69,11 +67,9 @@ class CsvTest extends TestCase
         $subject->convert('NoneExistingFile.csv');
     }
 
-    /**
-     * @test
-     * @dataProvider possibleCsvFiles
-     * @testdox Converts $_dataName CSV to PHP
-     */
+    #[Test]
+    #[TestDox('Converts $_dataName CSV to PHP')]
+    #[DataProvider('possibleCsvFiles')]
     public function convertsCsvFileToPhpFile(
         string $incomingCsvFile,
         string $expectedResultFile

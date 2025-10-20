@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.0.0 - 2025-10-20
+
+### BREAKING
+
+- Remove support for older dependencies.
+  The older versions of this package should work just fine.
+  There is not much more to this package, so no need to stay compatible with all versions.
+
 ## v1.6.0 - 2025-03-04
 
 ### Added
