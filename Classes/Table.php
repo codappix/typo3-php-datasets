@@ -33,6 +33,7 @@ use Doctrine\DBAL\Schema\Table as DbalTable;
 final readonly class Table
 {
     public function __construct(
+        private string $tableName,
         private DbalTable $dbalTable,
     ) {
     }
@@ -49,7 +50,7 @@ final readonly class Table
             throw new \RuntimeException(sprintf(
                 'Column "%s" does not exist in table: %s',
                 $columnName,
-                $this->dbalTable->getName(),
+                $this->tableName,
             ), 1760941225);
         }
     }

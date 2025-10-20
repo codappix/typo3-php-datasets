@@ -120,7 +120,15 @@ class AssertTest extends AbstractFunctionalTestCase
             '   \'sorting_foreign\' => \'3\'',
             ')',
             '',
-            'Not asserted record found for "sys_category_record_mm:".',
+            'Not asserted record found for table "sys_category_record_mm": ',
+            'array (',
+            '  \'uid_local\' => 1,',
+            '  \'uid_foreign\' => 2,',
+            '  \'sorting\' => 0,',
+            '  \'sorting_foreign\' => 2,',
+            '  \'tablenames\' => \'pages\',',
+            '  \'fieldname\' => \'categories\',',
+            ')',
         ]));
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/MmRelationBroken.php');
     }
@@ -131,7 +139,7 @@ class AssertTest extends AbstractFunctionalTestCase
         $this->importPHPDataSet(__DIR__ . '/Fixtures/WithDifferentColumns.php');
 
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessage('Not asserted record found for "pages:2".');
+        $this->expectExceptionMessage('Not asserted record with uid "2" found for table "pages".');
         $this->assertPHPDataSet(__DIR__ . '/Fixtures/AssertAdditionalRecords.php');
     }
 

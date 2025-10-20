@@ -55,7 +55,12 @@ class ConvertFromXml extends Command
         }
 
         $converter = new Xml();
-        foreach ($files as $file) {
+        foreach ($files as $index => $file) {
+            if (is_string($file) === false) {
+                $output->writeln(sprintf('File at index "%s" needs to be a string.', $index));
+                return Command::INVALID;
+            }
+
             try {
                 $converter->convert(realpath($file) ?: $file);
             } catch (\Exception $e) {

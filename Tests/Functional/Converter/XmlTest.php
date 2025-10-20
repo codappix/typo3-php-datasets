@@ -47,17 +47,6 @@ class XmlTest extends TestCase
     }
 
     #[Test]
-    public function canBeCreated(): void
-    {
-        $subject = new Xml();
-
-        self::assertInstanceOf(
-            Xml::class,
-            $subject
-        );
-    }
-
-    #[Test]
     public function throwsExceptionForNoneExistingFile(): void
     {
         $subject = new Xml();
@@ -80,6 +69,9 @@ class XmlTest extends TestCase
         self::assertFileEquals($expectedResultFile, $result);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public static function possibleXmlFiles(): array
     {
         return [

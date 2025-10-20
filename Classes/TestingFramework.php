@@ -36,9 +36,7 @@ trait TestingFramework
      */
     protected function importPHPDataSet(string $filePath): void
     {
-        $this->ensureFileExists($filePath);
-
-        $dataSet = include $filePath;
+        $dataSet = $this->getDataSet($filePath);
         try {
             (new PhpDataSet())->import($dataSet);
         } catch (Exception $e) {
@@ -52,51 +50,57 @@ trait TestingFramework
      */
     protected function assertPHPDataSet(string $filePath): void
     {
-        $this->ensureFileExists($filePath);
+        if (is_array($GLOBALS['TCA'] ?? null) === false) {
+            throw new \RuntimeException('TYPO3 GLOBALS["TCA"] is not defined.', 1760942400);
+        }
 
-        $dataSet = include $filePath;
         $failMessages = [];
-
-        foreach ($dataSet as $tableName => $expectedRecords) {
+        foreach ($this->getDataSet($filePath) as $tableName => $expectedRecords) {
             $records = $this->getAllRecords($tableName, (isset($GLOBALS['TCA'][$tableName])));
 
             foreach ($expectedRecords as $assertion) {
                 $result = $this->assertInRecords($assertion, $records);
                 if ($result === false) {
-                    // Handle error
-                    if (isset($assertion['uid']) && empty($records[$assertion['uid']])) {
-                        $failMessages[] = 'Record "' . $tableName . ':' . $assertion['uid'] . '" not found in database';
-                        continue;
-                    }
-                    if (isset($assertion['uid'])) {
-                        $recordIdentifier = $tableName . ':' . $assertion['uid'];
-                        $additionalInformation = $this->renderRecords($assertion, $records[$assertion['uid']]);
-                    } else {
-                        $recordIdentifier = $tableName;
-                        $additionalInformation = $this->arrayToString($assertion);
-                    }
-
-                    $failMessages[] = 'Assertion in data-set failed for "' . $recordIdentifier . '":' . PHP_EOL . $additionalInformation;
+                    $failMessages[] = $this->getAssertionErrorMessageForNoneMatchingRecord($assertion, $records, $tableName);
                     continue;
                 }
 
-                // Unset asserted record
+                // Unset already asserted record to only keep unexpected records.
                 unset($records[$result]);
+
                 // Increase assertion counter
-                self::assertTrue($result !== false);
+                self::assertTrue(true);
             }
 
-            if (!empty($records)) {
-                foreach ($records as $record) {
-                    $recordIdentifier = $tableName . ':' . ($record['uid'] ?? '');
-                    $failMessages[] = 'Not asserted record found for "' . $recordIdentifier . '".';
+            foreach ($records as $record) {
+                if (is_array($record) === false) {
+                    throw new \RuntimeException('Something went horribly wrong while fetching records, record was not an array.', 1760943536);
                 }
+
+                $failMessages[] = $this->getAssertionErrorMessageForUnexpectedRecord($record, $tableName);
             }
         }
+
+        $failMessages = array_filter($failMessages);
 
         if (!empty($failMessages)) {
             self::fail(implode(PHP_EOL, $failMessages));
         }
+    }
+
+    /**
+     * @return array<string, array<string, string>[]>
+     */
+    private function getDataSet(string $filePath): array
+    {
+        $this->ensureFileExists($filePath);
+
+        $dataSet = require $filePath;
+        if (is_array($dataSet) === false) {
+            throw new \RuntimeException('Given file did not return an array: ' . $filePath, 1760942255);
+        }
+
+        return $dataSet;
     }
 
     private function ensureFileExists(string $filePath): void
@@ -104,5 +108,48 @@ trait TestingFramework
         if (file_exists($filePath) === false) {
             throw new InvalidArgumentException('The requested PHP data-set file "' . $filePath . '" does not exist.', 1681207108);
         }
+    }
+
+    /**
+     * @param array{uid: int|string|null} $assertion
+     * @param array<string|int, mixed[]> $records
+     */
+    private function getAssertionErrorMessageForNoneMatchingRecord(array $assertion, array $records, string $tableName): string
+    {
+        // Handle error
+        if (isset($assertion['uid']) && empty($records[$assertion['uid']])) {
+            return 'Record "' . $tableName . ':' . $assertion['uid'] . '" not found in database';
+        }
+
+        if (isset($assertion['uid'])) {
+            $record = $records[$assertion['uid']] ?? null;
+            if (is_array($record) === false) {
+                return 'Assertion in data-set failed for "' . $tableName . ':' . $assertion['uid'] . '": Uid missing in database' . PHP_EOL;
+            }
+
+            return 'Assertion in data-set failed for "' . $tableName . ':' . $assertion['uid'] . '":' . PHP_EOL . $this->renderRecords($assertion, $record);
+        }
+
+        return 'Assertion in data-set failed for "' . $tableName . '":' . PHP_EOL . $this->arrayToString($assertion);
+    }
+
+    /**
+     * @param mixed[] $record
+     */
+    private function getAssertionErrorMessageForUnexpectedRecord(array $record, string $tableName): string
+    {
+        if (is_numeric($record['uid'] ?? null)) {
+            return sprintf(
+                'Not asserted record with uid "%s" found for table "%s".',
+                $record['uid'],
+                $tableName
+            );
+        }
+
+        return sprintf(
+            'Not asserted record found for table "%s": %s',
+            $tableName,
+            PHP_EOL . var_export($record, true)
+        );
     }
 }

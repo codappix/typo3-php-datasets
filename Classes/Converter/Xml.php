@@ -24,7 +24,6 @@ declare(strict_types=1);
 namespace Codappix\Typo3PhpDatasets\Converter;
 
 use InvalidArgumentException;
-use SimpleXMLElement;
 use SplFileObject;
 
 class Xml implements Converter
@@ -71,16 +70,8 @@ class Xml implements Converter
             throw new \Exception('Could not parse XML content.', 1681287859);
         }
         foreach ($xml->children() as $table) {
-            if (!$table instanceof SimpleXMLElement) {
-                continue;
-            }
-
             $insertArray = [];
             foreach ($table->children() as $column) {
-                if (!$column instanceof SimpleXMLElement) {
-                    continue;
-                }
-
                 $columnName = $column->getName();
                 $columnValue = (string)$table->$columnName;
 

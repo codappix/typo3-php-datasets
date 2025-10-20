@@ -8,6 +8,9 @@
   They modified `@internal` API and it is the fault of this package to use the API.
   We therefore now move to low level public API of doctrine/dbal instead of TYPO3 internal API.
   We also encapsulate the access to those APIs for easier maintenance.
+  We also raise dev dependencies to have automated CI verification that we do not use internal APIs anymore.
+- Proper errors if a record was found in DB, but not within assertions.
+- Do not include `phpstan-baseline.neon` in git exports / distribution.
 
 ### BREAKING
 

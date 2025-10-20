@@ -1,6 +1,49 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Codappix\\\\Typo3PhpDatasets\\\\PhpDataSet\\:\\:getConnectionPool\\(\\) should return TYPO3\\\\CMS\\\\Core\\\\Database\\\\ConnectionPool but returns object\\.$#"
+			rawMessage: 'Cognitive complexity for "Codappix\Typo3PhpDatasets\Converter\Csv::buildContent()" is 11, keep it under 9'
+			identifier: complexity.functionLike
 			count: 1
-			path: Classes/PhpDataSet.php
+			path: Classes/Converter/Csv.php
+
+		-
+			rawMessage: 'Parameter #1 $keys of function array_combine expects array<int|string>, array<mixed> given.'
+			identifier: argument.type
+			count: 1
+			path: Classes/Converter/Csv.php
+
+		-
+			rawMessage: Cannot cast mixed to string.
+			identifier: cast.string
+			count: 1
+			path: Classes/Converter/Xml.php
+
+		-
+			rawMessage: 'Call to static method PHPUnit\Framework\Assert::assertTrue() with true will always evaluate to true.'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: Tests/Functional/AbstractFunctionalTestCase.php
+
+		-
+			rawMessage: 'Cognitive complexity for "Codappix\Typo3PhpDatasets\Tests\Functional\AbstractFunctionalTestCase::assertPHPDataSet()" is 12, keep it under 9'
+			identifier: complexity.functionLike
+			count: 1
+			path: Tests/Functional/AbstractFunctionalTestCase.php
+
+		-
+			rawMessage: 'Method Codappix\Typo3PhpDatasets\Tests\Functional\AbstractFunctionalTestCase::getDataSet() should return array<string, array<array<string, string>>> but returns array<mixed, mixed>.'
+			identifier: return.type
+			count: 1
+			path: Tests/Functional/AbstractFunctionalTestCase.php
+
+		-
+			rawMessage: 'Parameter #1 $assertion of method Codappix\Typo3PhpDatasets\Tests\Functional\AbstractFunctionalTestCase::getAssertionErrorMessageForNoneMatchingRecord() expects array{uid: int|string|null}, array<string, string> given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Functional/AbstractFunctionalTestCase.php
+
+		-
+			rawMessage: 'Parameter #2 $records of method Codappix\Typo3PhpDatasets\Tests\Functional\AbstractFunctionalTestCase::getAssertionErrorMessageForNoneMatchingRecord() expects array<int|string, array<mixed>>, array given.'
+			identifier: argument.type
+			count: 1
+			path: Tests/Functional/AbstractFunctionalTestCase.php
