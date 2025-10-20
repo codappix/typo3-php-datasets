@@ -68,7 +68,7 @@ trait TestingFramework
                 // Unset already asserted record to only keep unexpected records.
                 unset($records[$result]);
 
-                // Increase assertion counter
+                // @phpstan-ignore staticMethod.alreadyNarrowedType (We want to increase assertion counter, but there is no public API)
                 self::assertTrue(true);
             }
 
@@ -100,6 +100,7 @@ trait TestingFramework
             throw new \RuntimeException('Given file did not return an array: ' . $filePath, 1760942255);
         }
 
+        // @phpstan-ignore return.type (We don't want to validate the whole structure)
         return $dataSet;
     }
 
@@ -111,12 +112,11 @@ trait TestingFramework
     }
 
     /**
-     * @param array{uid: int|string|null} $assertion
-     * @param array<string|int, mixed[]> $records
+     * @param array<string, string> $assertion
+     * @param mixed[] $records
      */
     private function getAssertionErrorMessageForNoneMatchingRecord(array $assertion, array $records, string $tableName): string
     {
-        // Handle error
         if (isset($assertion['uid']) && empty($records[$assertion['uid']])) {
             return 'Record "' . $tableName . ':' . $assertion['uid'] . '" not found in database';
         }

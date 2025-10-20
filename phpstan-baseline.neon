@@ -19,31 +19,7 @@ parameters:
 			path: Classes/Converter/Xml.php
 
 		-
-			rawMessage: 'Call to static method PHPUnit\Framework\Assert::assertTrue() with true will always evaluate to true.'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 1
-			path: Tests/Functional/AbstractFunctionalTestCase.php
-
-		-
 			rawMessage: 'Cognitive complexity for "Codappix\Typo3PhpDatasets\Tests\Functional\AbstractFunctionalTestCase::assertPHPDataSet()" is 12, keep it under 9'
 			identifier: complexity.functionLike
-			count: 1
-			path: Tests/Functional/AbstractFunctionalTestCase.php
-
-		-
-			rawMessage: 'Method Codappix\Typo3PhpDatasets\Tests\Functional\AbstractFunctionalTestCase::getDataSet() should return array<string, array<array<string, string>>> but returns array<mixed, mixed>.'
-			identifier: return.type
-			count: 1
-			path: Tests/Functional/AbstractFunctionalTestCase.php
-
-		-
-			rawMessage: 'Parameter #1 $assertion of method Codappix\Typo3PhpDatasets\Tests\Functional\AbstractFunctionalTestCase::getAssertionErrorMessageForNoneMatchingRecord() expects array{uid: int|string|null}, array<string, string> given.'
-			identifier: argument.type
-			count: 1
-			path: Tests/Functional/AbstractFunctionalTestCase.php
-
-		-
-			rawMessage: 'Parameter #2 $records of method Codappix\Typo3PhpDatasets\Tests\Functional\AbstractFunctionalTestCase::getAssertionErrorMessageForNoneMatchingRecord() expects array<int|string, array<mixed>>, array given.'
-			identifier: argument.type
 			count: 1
 			path: Tests/Functional/AbstractFunctionalTestCase.php
