@@ -54,6 +54,7 @@ class ImportTest extends AbstractFunctionalTestCase
         $this->importPHPDataSet(__DIR__ . '/Fixtures/WithNull.php');
 
         $records = $this->getAllRecords('pages', true);
+        self::assertIsArray($records[1]);
         self::assertNull($records[1]['description']);
     }
 

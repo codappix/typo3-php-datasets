@@ -47,17 +47,6 @@ class CsvTest extends TestCase
     }
 
     #[Test]
-    public function canBeCreated(): void
-    {
-        $subject = new Csv();
-
-        self::assertInstanceOf(
-            Csv::class,
-            $subject
-        );
-    }
-
-    #[Test]
     public function throwsExceptionForNoneExistingFile(): void
     {
         $subject = new Csv();
@@ -80,6 +69,9 @@ class CsvTest extends TestCase
         self::assertFileEquals($expectedResultFile, $result);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public static function possibleCsvFiles(): array
     {
         return [

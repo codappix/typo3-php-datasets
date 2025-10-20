@@ -6,6 +6,7 @@ Tests export-ignore
 
 .php-cs-fixer.dist.php export-ignore
 phpstan.neon export-ignore
+phpstan-baseline.neon export-ignore
 phpunit.xml.dist export-ignore
 
 shell.nix export-ignore

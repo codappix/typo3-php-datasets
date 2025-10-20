@@ -30,6 +30,7 @@ class PhpDataSet
 {
     /**
      * @api
+     * @param array<string, array<string, string>[]> $dataSet
      */
     public function import(array $dataSet): void
     {
