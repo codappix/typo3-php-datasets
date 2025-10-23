@@ -55,6 +55,17 @@ jobs:
       - name: 'Install xmllint'
         run: 'sudo apt update && sudo apt install libxml2-utils'
 
+      - name: 'Get composer cache directory'
+        id: 'composer-cache'
+        run: 'echo "dir=$(composer config cache-files-dir)" >> $FORGEJO_OUTPUT'
+
+      - name: 'Cache dependencies'
+        uses: 'actions/cache@v4'
+        with:
+          path: '${{ steps.composer-cache.outputs.dir }}'
+          key: 'composer'
+          restore-keys: 'composer'
+
       - name: 'Install dependencies'
         run: 'composer update --prefer-dist --no-progress'
 
@@ -70,6 +81,17 @@ jobs:
         uses: 'actions/setup-php@v2'
         with:
           php-version: '8.3'
+
+      - name: 'Get composer cache directory'
+        id: 'composer-cache'
+        run: 'echo "dir=$(composer config cache-files-dir)" >> $FORGEJO_OUTPUT'
+
+      - name: 'Cache dependencies'
+        uses: 'actions/cache@v4'
+        with:
+          path: '${{ steps.composer-cache.outputs.dir }}'
+          key: 'composer'
+          restore-keys: 'composer'
 
       - name: 'Install dependencies'
         run: 'composer update --prefer-dist --no-progress'
@@ -99,6 +121,17 @@ jobs:
           php-version: '${{ matrix.php-version }}'
           extensions: 'sqlite3'
 
+      - name: 'Get composer cache directory'
+        id: 'composer-cache'
+        run: 'echo "dir=$(composer config cache-files-dir)" >> $FORGEJO_OUTPUT'
+
+      - name: 'Cache dependencies'
+        uses: 'actions/cache@v4'
+        with:
+          path: '${{ steps.composer-cache.outputs.dir }}'
+          key: 'composer'
+          restore-keys: 'composer'
+
       - name: 'Install dependencies with expected TYPO3 version'
         run: 'composer require --prefer-dist --no-progress "typo3/cms-core:${{ matrix.typo3-version }}"'
 
@@ -123,6 +156,17 @@ jobs:
         uses: 'actions/setup-php@v2'
         with:
           php-version: '${{ matrix.php-version }}'
+
+      - name: 'Get composer cache directory'
+        id: 'composer-cache'
+        run: 'echo "dir=$(composer config cache-files-dir)" >> $FORGEJO_OUTPUT'
+
+      - name: 'Cache dependencies'
+        uses: 'actions/cache@v4'
+        with:
+          path: '${{ steps.composer-cache.outputs.dir }}'
+          key: 'composer'
+          restore-keys: 'composer'
 
       - name: 'Install dependencies with expected TYPO3 version'
         run: 'composer require --prefer-dist --no-progress "typo3/cms-backend:${{ matrix.typo3-version }}" "typo3/cms-core:${{ matrix.typo3-version }}" "typo3/cms-dashboard:${{ matrix.typo3-version }}"'
