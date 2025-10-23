@@ -10,9 +10,9 @@ We don't like the approach of TYPO3 Testing Framework regarding DataSets.
 
 We have the following issues:
 
-#. XML is only supported for imports, not for assertions
+1. XML is only supported for imports, not for assertions
 
-#. CSV is a bad format that already got hacked, e.g. ``#`` to indicate comments.
+2. CSV is a bad format that already got hacked, e.g. ``#`` to indicate comments.
    We consider it bad as one needs special toolings in order to properly write CSV files, they are not human readable.
 
 That's why we prefer PHP files instead. That way developers are free to use whatever
@@ -34,13 +34,12 @@ See our own tests for how to use, as they do nothing else.
 Within testing framework
 ------------------------
 
-#. Create data set
+1. Create data set
 
    A data set is a PHP file that returns an array of tables with their records.
    Format is:
 
-   .. code-block:: php
-
+   ```php
       return [
           'table_name' => [
               // Records
@@ -50,11 +49,11 @@ Within testing framework
               ],
           ],
       ];
+   ```
 
-#. Import the :php:`Codappix\Typo3PhpDatasets\TestingFramework` trait
+2. Import the :php:`Codappix\Typo3PhpDatasets\TestingFramework` trait
 
-   .. code-block:: php
-
+   ```php
       use Codappix\Typo3PhpDatasets\TestingFramework as PhpDatasets;
 
       final class MyTest extends FunctionalTestCase
@@ -63,20 +62,24 @@ Within testing framework
 
           // ...
       }
+   ```
 
-#. Use API
+3. Use API
 
    Import:
 
-   .. code-block:: php
+   ```php
 
       $this->importPHPDataSet(__DIR__ . '/Fixtures/SimpleSet.php');
 
+   ```
+
    Assert:
 
-   .. code-block:: php
+   ```php
 
       $this->assertPHPDataSet(__DIR__ . '/Fixtures/SimpleSet.php');
+   ```
 
 Converter
 =========
@@ -88,11 +91,11 @@ Available commands:
 - ``convert-from-xml``
 - ``convert-from-csv``
 
-Each command will convert the existing file(s) and place a new php variant next to it.
+Each command will convert the existing file(s) and place a new PHP variant next to it.
 Existing files are only read, not changed.
 
 TODO
 ====
 
-#. Implement use case to check for necessary updates and allow updates.
+1. Implement use case to check for necessary updates and allow updates.
    Use for static data during deployment within update wizards or other scripts.
