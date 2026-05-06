@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace Codappix\Typo3PhpDatasets\Command;
 
 use Codappix\Typo3PhpDatasets\Converter\Xml;
+use Override;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -41,11 +42,13 @@ class ConvertFromXml extends Command
      */
     protected static $defaultDescription = 'Converts XML data-sets to PHP data-sets.';
 
+    #[Override]
     protected function configure(): void
     {
         $this->addArgument('file', InputArgument::IS_ARRAY, 'The file(s) to convert.');
     }
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $files = $input->getArgument('file');

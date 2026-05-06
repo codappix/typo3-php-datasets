@@ -26,6 +26,7 @@ namespace Codappix\Typo3PhpDatasets\Tests\Functional\Converter;
 use Codappix\Typo3PhpDatasets\Converter\Csv;
 use GlobIterator;
 use InvalidArgumentException;
+use Override;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -36,6 +37,7 @@ use PHPUnit\Framework\TestCase;
 #[TestDox('The CSV converter')]
 class CsvTest extends TestCase
 {
+    #[Override]
     protected function tearDown(): void
     {
         $filesToDelete = new GlobIterator(__DIR__ . '/Fixtures/Csv/*Incoming.php');

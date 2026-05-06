@@ -24,10 +24,12 @@ declare(strict_types=1);
 namespace Codappix\Typo3PhpDatasets\Converter;
 
 use InvalidArgumentException;
+use Override;
 use SplFileObject;
 
 class Csv implements Converter
 {
+    #[Override]
     public function convert(string $fileName): string
     {
         if (file_exists($fileName) === false) {
