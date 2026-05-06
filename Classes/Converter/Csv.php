@@ -79,7 +79,7 @@ class Csv implements Converter
             }
 
             if ($columns === [] && is_array($line)) {
-                $columns = array_filter($line);
+                $columns = $this->reduceToValidColumns($line);
                 continue;
             }
 
@@ -103,5 +103,18 @@ class Csv implements Converter
             && count($line) === 1
             && is_null($line[0])
         ;
+    }
+
+    /**
+     * @param mixed[] $line
+     *
+     * @return string[]
+     */
+    private static function reduceToValidColumns(array $line): array
+    {
+        return array_filter(
+            $line,
+            fn (mixed $line): bool => is_string($line) && empty($line) === false
+        );
     }
 }
