@@ -3,6 +3,7 @@ $finder = (new PhpCsFixer\Finder())
     ->ignoreVCSIgnored(true)
     ->exclude('Tests/Functional/Converter/Fixtures/Csv/')
     ->exclude('Tests/Functional/Converter/Fixtures/Xml/')
+    ->exclude('var/')
     ->in(realpath(__DIR__))
 ;
 
