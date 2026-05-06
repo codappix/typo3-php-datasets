@@ -47,8 +47,8 @@ final readonly class Connection
 
     public function getTable(string $tableName): Table
     {
-        foreach ($this->typo3Connection->createSchemaManager()->listTables() as $table) {
-            if ($table->getObjectName()->toString() === $tableName) {
+        foreach ($this->typo3Connection->createSchemaManager()->introspectTables() as $table) {
+            if ($table->getObjectName()->getUnqualifiedName()->getValue() === $tableName) {
                 return new Table(
                     $tableName,
                     $table
