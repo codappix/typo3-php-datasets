@@ -1,12 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			rawMessage: 'Cognitive complexity for "Codappix\Typo3PhpDatasets\Converter\Csv::buildContent()" is 11, keep it under 9'
-			identifier: complexity.functionLike
-			count: 1
-			path: Classes/Converter/Csv.php
-
-		-
 			rawMessage: 'Parameter #1 $keys of function array_combine expects array<int|string>, array<mixed> given.'
 			identifier: argument.type
 			count: 1

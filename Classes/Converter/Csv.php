@@ -66,7 +66,7 @@ class Csv implements Converter
         $incomingFile->setCsvControl(',', '"', '"');
 
         foreach ($incomingFile as $line) {
-            if (is_array($line) && count($line) === 1 && is_null($line[0])) {
+            if (self::isEndOfFile($line)) {
                 // End of file
                 break;
             }
@@ -95,5 +95,13 @@ class Csv implements Converter
             'return ' . var_export($phpArray, true) . ';',
             '',
         ]);
+    }
+
+    private static function isEndOfFile(mixed $line): bool
+    {
+        return is_array($line)
+            && count($line) === 1
+            && is_null($line[0])
+        ;
     }
 }
