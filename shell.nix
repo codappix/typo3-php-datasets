@@ -14,6 +14,7 @@ let
 
     extraConfig = ''
       xdebug.mode = debug
+      memory_limit = 4G
     '';
   };
 
