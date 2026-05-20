@@ -9,6 +9,7 @@ parameters:
     cognitive_complexity:
         class: 40
         function: 9
+    reportIgnoresWithoutComments: true
     ignoreErrors:
         # We explicitly want to test the PHPUnit integration
         -
