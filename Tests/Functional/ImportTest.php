@@ -75,10 +75,10 @@ class ImportTest extends AbstractFunctionalTestCase
     public function failsIfSqlError(): void
     {
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessageMatches(
-            '#Error for PHP data-set "' . __DIR__ . '/Fixtures/WithBrokenSql.php":'
+        $this->expectExceptionMessage(
+            'Error for PHP data-set "' . __DIR__ . '/Fixtures/WithBrokenSql.php":'
             . PHP_EOL
-            . 'Column "none_existing_column" does not exist in table: pages#'
+            . 'An exception occurred while executing a query: SQLSTATE[HY000]: General error: 1 table pages has no column named none_existing_column'
         );
         $this->importPHPDataSet(__DIR__ . '/Fixtures/WithBrokenSql.php');
     }

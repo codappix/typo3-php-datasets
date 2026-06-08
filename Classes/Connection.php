@@ -23,7 +23,6 @@ declare(strict_types=1);
 
 namespace Codappix\Typo3PhpDatasets;
 
-use Doctrine\DBAL\ParameterType;
 use TYPO3\CMS\Core\Database\Connection as Typo3Connection;
 
 /**
@@ -38,24 +37,9 @@ final readonly class Connection
 
     /**
      * @param string[] $record
-     * @param ParameterType[] $types
      */
-    public function insert(string $tableName, array $record, array $types): void
+    public function insert(string $tableName, array $record): void
     {
-        $this->typo3Connection->insert($tableName, $record, $types);
-    }
-
-    public function getTable(string $tableName): Table
-    {
-        foreach ($this->typo3Connection->createSchemaManager()->introspectTables() as $table) {
-            if ($table->getObjectName()->getUnqualifiedName()->getValue() === $tableName) {
-                return new Table(
-                    $tableName,
-                    $table
-                );
-            }
-        }
-
-        throw new \RuntimeException('Could not fetch table details for table: ' . $tableName, 1760939710);
+        $this->typo3Connection->insert($tableName, $record);
     }
 }

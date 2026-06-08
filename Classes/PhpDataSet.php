@@ -38,11 +38,9 @@ class PhpDataSet
 
         foreach ($dataSet as $tableName => $records) {
             $connection = $connectionFactory->createForTable($tableName);
-            $table = $connection->getTable($tableName);
 
             foreach ($records as $index => $record) {
-                $types = array_map($table->getTypeForColumn(...), array_keys($record));
-                $connection->insert($tableName, $record, $types);
+                $connection->insert($tableName, $record);
             }
         }
     }
