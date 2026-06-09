@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.1.0 - 2025-11-26
+
+### Added
+
+- Support for TYPO3 14.0.
+- Support for PHP 8.5.
+
 ## v2.0.0 - 2025-10-20
 
 ### Added
