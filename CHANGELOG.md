@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.1.1 - 2026-06-09
+
+### Fixed
+
+- Unnecessary slow execution.  
+  We no longer fetch types from database, but pass values without types.
+
 ## v2.1.0 - 2025-11-26
 
 ### Added
