@@ -34,13 +34,13 @@
         "typo3/cms-core": "^13.4.19 || ^14.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.4",
+        "friendsofphp/php-cs-fixer": "3.95.2",
         "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan": "^2.1",
-        "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan": "2.2.5",
+        "phpstan/phpstan-deprecation-rules": "2.0.4",
+        "phpstan/phpstan-phpunit": "2.0.18",
         "phpunit/phpunit": "^11.5 || ^12.2",
-        "tomasvotruba/cognitive-complexity": "^1.0",
+        "tomasvotruba/cognitive-complexity": "1.1.1",
         "typo3/testing-framework": "^9.2"
     },
     "extra": {
