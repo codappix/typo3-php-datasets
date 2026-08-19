@@ -26,6 +26,9 @@
     "bin": [
         "bin/typo3-php-datasets"
     ],
+    "suggest": {
+        "ext-simplexml": "To convert XML files into PHP files."
+    },
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "composer-runtime-api": "^2.2",
@@ -40,6 +43,7 @@
         "phpstan/phpstan-deprecation-rules": "2.0.4",
         "phpstan/phpstan-phpunit": "2.0.18",
         "phpunit/phpunit": "^11.5 || ^12.2",
+        "shipmonk/composer-dependency-analyser": "^1.8",
         "tomasvotruba/cognitive-complexity": "1.1.1",
         "typo3/testing-framework": "^9.2"
     },

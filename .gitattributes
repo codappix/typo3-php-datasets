@@ -5,6 +5,7 @@ Tests export-ignore
 .gitignore export-ignore
 
 .php-cs-fixer.dist.php export-ignore
+composer-dependency-analyser.php export-ignore
 phpstan.neon export-ignore
 phpstan-baseline.neon export-ignore
 phpunit.xml.dist export-ignore

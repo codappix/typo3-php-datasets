@@ -69,6 +69,9 @@ jobs:
       - name: 'Install dependencies with expected TYPO3 version'
         run: 'composer require --prefer-dist --no-progress "typo3/cms-core:${{ matrix.typo3-version }}"'
 
+      - name: 'Dependency Check'
+        run: './vendor/bin/composer-dependency-analyser'
+
       - name: 'Code Quality (by PHPStan)'
         run: './vendor/bin/phpstan analyse'
 
