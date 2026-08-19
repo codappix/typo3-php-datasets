@@ -32,7 +32,7 @@ jobs:
           schema: 'vendor/phpunit/phpunit/phpunit.xsd'
           file: 'phpunit.xml.dist'
 
-  advances-qa:
+  advanced-qa:
     runs-on: 'self-hosted'
     needs:
       - 'base-qa'
